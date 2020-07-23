@@ -18,10 +18,10 @@ python setup.py install --user
 ```
 
 ## API documentation
-* [Client](doc/client.md)
-* [Organizations](doc/organizations.md)
-* [PPP Loans](doc/ppp_loans.md)
+* [API Dictionary](https://ussbaforgiveness.github.io/API-Dictionary.html)
 
+## Sample Use Cases
+* [Use Cases](https://ussbaforgiveness.github.io/index.html)
 
 ## API examples
 * [create_forgiveness_request.py](examples/create_forgiveness_request.py)
