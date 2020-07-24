@@ -3,6 +3,7 @@ from PPPForgivenessSDK.client import Client
 # to run file 'list_forgiveness_messages.py', use valid token (page parameter can be changed )
 client = Client(
     access_token='{{YOUR_TOKEN_HERE}}',
+    vendor_key='{{YOUR_VENDOR_KEY}}'.
     environment='sandbox'
 )
 
