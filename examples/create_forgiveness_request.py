@@ -4,6 +4,7 @@ from PPPForgivenessSDK.client import Client
 # , use a valid toke and insure loan information matches a valid loan without a previous forgiveness request
 client = Client(
     access_token='{{YOUR_TOKEN_HERE}}',
+    vendor_key='{{YOUR_VENDOR_KEY}}'.
     environment='sandbox'
 )
 
