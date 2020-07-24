@@ -3,6 +3,7 @@ from PPPForgivenessSDK.client import Client
 # to run file 'delete_forgiveness_request.py', use valid token and a slug associated with a valid forgiveness request
 client = Client(
     access_token='{{YOUR_TOKEN_HERE}}',
+    vendor_key='{{YOUR_VENDOR_KEY}}'.
     environment='sandbox'
 )
 
