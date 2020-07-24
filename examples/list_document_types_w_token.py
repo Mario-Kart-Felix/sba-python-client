@@ -1,7 +1,11 @@
 from PPPForgivenessSDK.client import Client
 
 # to run file 'list_dcument_types.py', use valid token (page parameter can be changed )
-client = Client(access_token='9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b',   environment='sandbox')
+client = Client(
+    access_token='{{YOUR_TOKEN_HERE}}',
+    vendor_key='{{YOUR_VENDOR_KEY}}'.
+    environment='sandbox'
+)
 
 document_type_api = client.document_types
 
