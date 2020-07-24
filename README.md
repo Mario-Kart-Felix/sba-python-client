@@ -36,7 +36,7 @@ python setup.py install --user
 
 ## Usage
 
-Request an API token and vendor key (you do not need a vendor_key to test as described below in the sandbox environment)
+Request an API token and vendor key
 
 Now make your first API call....
    * copy the file `/examples` `examples/list_document_type.py` to a working directory.
@@ -45,6 +45,7 @@ Now make your first API call....
             ```python
             client = Client(
             access_token='{{YOUR_TOKEN_HERE}}',
+            vendor_key='{{YOUR_VENDOR_KEY}},
             environment='sandbox'
                 )
             ```
