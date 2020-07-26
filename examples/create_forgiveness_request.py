@@ -5,7 +5,7 @@ from PPPForgivenessSDK.client import Client
 client = Client(
     access_token='{{YOUR_TOKEN_HERE}}',
     vendor_key='{{YOUR_VENDOR_KEY}}',
-    environment='sandbox',
+    environment='sandbox'
 )
 
 forgiveness_api = client.forgiveness_requests
