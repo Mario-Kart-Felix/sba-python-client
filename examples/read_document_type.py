@@ -3,7 +3,7 @@ from PPPForgivenessSDK.client import Client
 # to run file 'read_document_types.py', use valid token and valid DOCUMENT_TYPE_ID (int)
 client = Client(
     access_token='{{YOUR_TOKEN_HERE}}',
-    vendor_key='{{YOUR_VENDOR_KEY}}'.
+    vendor_key='{{YOUR_VENDOR_KEY}}',
     environment='sandbox'
 )
 
