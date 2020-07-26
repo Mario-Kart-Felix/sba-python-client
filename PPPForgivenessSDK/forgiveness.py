@@ -21,8 +21,10 @@ class ForgivenessRequestApi(BaseApi):
             response = self.execute(http_method=http_method,
                                     url=uri)
 
-            return {'status': response.status_code,
-                    'data': json.loads(response.text)}
+            try:
+                return {'status': response.status_code, 'data': json.loads(response.text)}
+            except:
+                return {'status': response.status_code, 'data': response.text}
         except:
             raise UnknownException # TODO: what about 405?
 
@@ -87,7 +89,8 @@ class ForgivenessRequestApi(BaseApi):
                forgive_schedule_a_line_13=None, forgive_covered_period_from=None, forgive_covered_period_to=None,
                forgive_alternate_covered_period_from=None, forgive_alternate_covered_period_to=None, forgive_2_million=None,
                forgive_payroll_schedule=None, primary_email=None, primary_name=None, ez_form=None, no_employees=None,
-               no_reduction_in_employees=None, no_reduction_in_employees_and_covid_impact=None, forgive_lender_confirmation=None):
+               no_reduction_in_employees=None, no_reduction_in_employees_and_covid_impact=None, forgive_lender_confirmation=None,
+               forgive_lender_decision=None):
         """
 
         :param bank_notional_amount:
@@ -141,6 +144,7 @@ class ForgivenessRequestApi(BaseApi):
         :param no_reduction_in_employees:
         :param no_reduction_in_employees_and_covid_impact:
         :param forgive_lender_confirmation;
+        :param forgive_lender_decision;
         :return:
         """
         http_method = "POST"
@@ -200,18 +204,19 @@ class ForgivenessRequestApi(BaseApi):
                 "no_employees": no_employees,
                 "no_reduction_in_employees": no_reduction_in_employees,
                 "no_reduction_in_employees_and_covid_impact": no_reduction_in_employees_and_covid_impact,
-                'forgive_lender_confirmation': forgive_lender_confirmation
+                'forgive_lender_confirmation': forgive_lender_confirmation,
+                'forgive_lender_decision': forgive_lender_decision,
             }
         }
+
+        headers = {'Content-Type': 'application/json'}
         try:
             response = self.execute(http_method=http_method,
+                                    headers=headers,
                                     url=uri,
-                                    data=params)
+                                    data=json.dumps(params))
 
             return {'status': response.status_code,
                     'data': json.loads(response.text)}
         except:
             raise UnknownException
-
-
-
