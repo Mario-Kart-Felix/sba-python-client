@@ -3,7 +3,7 @@ from PPPForgivenessSDK.client import Client
 # to run file 'create_forgiveness_request.py',  use a valid token and insure slug is associated with a valid loan
 client = Client(
     access_token='{{YOUR_TOKEN_HERE}}',
-    vendor_key='{{YOUR_VENDOR_KEY}}'.
+    vendor_key='{{YOUR_VENDOR_KEY}}',
     environment='sandbox'
 )
 
