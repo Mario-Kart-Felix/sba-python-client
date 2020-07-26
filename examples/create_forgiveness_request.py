@@ -4,8 +4,8 @@ from PPPForgivenessSDK.client import Client
 # , use a valid toke and insure loan information matches a valid loan without a previous forgiveness request
 client = Client(
     access_token='{{YOUR_TOKEN_HERE}}',
-    vendor_key='{{YOUR_VENDOR_KEY}}'.
-    environment='sandbox'
+    vendor_key='{{YOUR_VENDOR_KEY}}',
+    environment='sandbox',
 )
 
 forgiveness_api = client.forgiveness_requests
@@ -20,7 +20,7 @@ result = forgiveness_api.create(
                                 ein='{{EIN/SSN_HERE}}',
                                 funding_date=None,
                                 forgive_eidl_amount=None,
-                                forgive_eiidl_application_number=None,
+                                forgive_eidl_application_number=None,
                                 forgive_payroll=None,
                                 forgive_rent=None,
                                 forgive_utilities=None,
@@ -38,7 +38,7 @@ result = forgiveness_api.create(
                                 forgive_fte_at_forgiveness_application=None,
                                 forgive_schedule_a_line_1=None,
                                 forgive_schedule_a_line_2=None,
-                                forgive_schedule_a_line_3_checkbox=None,
+                                forgive_schedule_a_line_3_checkbox=False,
                                 forgive_schedule_a_line_3=None,
                                 forgive_schedule_a_line_4=None,
                                 forgive_schedule_a_line_5=None,
@@ -47,7 +47,7 @@ result = forgiveness_api.create(
                                 forgive_schedule_a_line_8=None,
                                 forgive_schedule_a_line_9=None,
                                 forgive_schedule_a_line_10=None,
-                                forgive_schedule_a_line_10_checkbox=None,
+                                forgive_schedule_a_line_10_checkbox=False,
                                 forgive_schedule_a_line_11=None,
                                 forgive_schedule_a_line_12=None,
                                 forgive_schedule_a_line_13=None,
@@ -55,15 +55,16 @@ result = forgiveness_api.create(
                                 forgive_covered_period_to=None,
                                 forgive_alternate_covered_period_from=None,
                                 forgive_alternate_covered_period_to=None,
-                                forgive_2_million=None,
+                                forgive_2_million=False,
                                 forgive_payroll_schedule=None,
                                 primary_email=None,
                                 primary_name=None,
-                                ez_form=None,
-                                no_employees=None,
-                                no_reduction_in_employees=None,
-                                no_reduction_in_employees_and_covid_impact=None,
-                                forgive_lender_confirmation=None
+                                ez_form=False,
+                                no_employees=False,
+                                no_reduction_in_employees=False,
+                                no_reduction_in_employees_and_covid_impact=False,
+                                forgive_lender_confirmation=False,
+                                forgive_lender_decision=None,
                     )
 
 
