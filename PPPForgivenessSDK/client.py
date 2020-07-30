@@ -8,9 +8,9 @@ from .messages import MessageApi
 class Client(object):
     version = 'v1'
     environments = {
-        'production': 'https://app.ussbaforgiveness.com/',
-        'sandbox': 'https://sandbox.ussbaforgiveness.com/',
-        'perf': 'https://perf.ussbaforgiveness.com/',
+        'production': 'https://app.forgiveness.sba.gov/',
+        'sandbox': 'https://sandbox.forgiveness.sba.gov/',
+        'perf': 'https://perf.forgiveness.sba.gov/',
     }
 
     def __init__(self, timeout=60, max_retries=3, backoff_factor=0,
