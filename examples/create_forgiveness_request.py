@@ -60,7 +60,6 @@ result = forgiveness_api.create(
                                 primary_email=None,
                                 primary_name=None,
                                 ez_form=False,
-                                no_employees=False,
                                 no_reduction_in_employees=False,
                                 no_reduction_in_employees_and_covid_impact=False,
                                 forgive_lender_confirmation=False,
