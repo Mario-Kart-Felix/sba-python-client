@@ -3,14 +3,15 @@ from .document_types import DocumentTypeApi
 from .loan_documents import LoanDocumentsApi
 from .forgiveness import ForgivenessRequestApi
 from .messages import MessageApi
+from .validation import LookupApi
 
 
 class Client(object):
     version = 'v1'
     environments = {
-        'production': 'https://app.forgiveness.sba.gov/',
-        'sandbox': 'https://sandbox.forgiveness.sba.gov/',
-        'perf': 'https://perf.forgiveness.sba.gov/',
+        'production': 'https://app.ussbaforgiveness.com/',
+        'sandbox': 'https://sandbox.ussbaforgiveness.com/',
+        'perf': 'https://perf.ussbaforgiveness.com/',
     }
 
     def __init__(self, timeout=60, max_retries=3, backoff_factor=0,
@@ -40,13 +41,14 @@ class Client(object):
 
     @property
     def base_uri(self):
-        """Generates the base URI for the selected environment
+        """Generates the base URI for the selected environment. Uses environment
+        specific URL if environment passed, otherwise uses the string passed as
+        a custom URL for dev.
 
             :return:
                 str: The base URI
         """
-
-        return self.environments[self.environment]
+        return self.environments.get(self.environment, self.environment)
 
     @property
     def api_uri(self):
@@ -72,3 +74,6 @@ class Client(object):
     def messages(self):
         return MessageApi(self)
 
+    @property
+    def validations(self):
+        return LookupApi(self)

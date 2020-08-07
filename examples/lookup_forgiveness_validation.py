@@ -7,10 +7,9 @@ client = Client(
     environment='sandbox'
 )
 
-message_api = client.messages
+lookup_api = client.validations
 
-# list first page of document types  an SBA Number and/or a true or false for is_complete can be added
-result = message_api.list(page=1) # get a paginated list of forgiveness requests
+result = lookup_api.list(sba_number="{{SBA_NUMBER}}")
 
 if result['status'] == 200:
     print(result['data'])

@@ -10,7 +10,7 @@ client = Client(
 message_api = client.messages
 
 # list first page of document types  an SBA Number and/or a true or false for is_complete can be added
-result = message_api.list(page=1) # get a paginated list of forgiveness requests
+result = message_api.list(page=1, sba_number='{{SBA_NUMBER_HERE}}', is_complete=False) # get a paginated list of forgiveness requests
 
 if result['status'] == 200:
     print(result['data'])

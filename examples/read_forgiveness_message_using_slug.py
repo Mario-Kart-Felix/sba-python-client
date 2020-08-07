@@ -1,6 +1,6 @@
 from PPPForgivenessSDK.client import Client
 
-# to run file 'list_forgiveness_messages.py', use valid token (page parameter can be changed )
+# to run file 'read_forgiveness_message.py', use valid token and slug associated with a valid thread
 client = Client(
     access_token='{{YOUR_TOKEN_HERE}}',
     vendor_key='{{YOUR_VENDOR_KEY}}',
@@ -9,8 +9,8 @@ client = Client(
 
 message_api = client.messages
 
-# list first page of document types  an SBA Number and/or a true or false for is_complete can be added
-result = message_api.list(page=1) # get a paginated list of forgiveness requests
+# read info for single forgiveness request
+result = message_api.get(slug='{{SLUG HERE}}') # get a single forgiveness message
 
 if result['status'] == 200:
     print(result['data'])
