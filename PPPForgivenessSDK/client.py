@@ -9,9 +9,9 @@ from .validation import LookupApi
 class Client(object):
     version = 'v1'
     environments = {
-        'production': 'https://app.ussbaforgiveness.com/',
-        'sandbox': 'https://sandbox.ussbaforgiveness.com/',
-        'perf': 'https://perf.ussbaforgiveness.com/',
+        'production': 'https://forgiveness.sba.gov/',
+        'sandbox': 'https://sandbox.forgiveness.sba.gov/',
+        'perf': 'https://perf.forgiveness.sba.gov/',
     }
 
     def __init__(self, timeout=60, max_retries=3, backoff_factor=0,
