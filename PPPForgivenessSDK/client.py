@@ -11,7 +11,6 @@ class Client(object):
     environments = {
         'production': 'https://forgiveness.sba.gov/',
         'sandbox': 'https://sandbox.forgiveness.sba.gov/',
-        'perf': 'https://perf.forgiveness.sba.gov/',
     }
 
     def __init__(self, timeout=60, max_retries=3, backoff_factor=0,
