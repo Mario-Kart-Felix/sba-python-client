@@ -80,3 +80,31 @@ class MessageApi(BaseApi):
         except:
             raise UnknownException
 
+    def update_with_multiple_files(self, slug, document_types, document_names, documents, message_text=''):
+        """
+        :param slug: The slug for the message thread
+        :param document_types: Array of Id's of the document_types
+        :param documents: Array of files to upload (Path to a file to upload for each element)
+        :param message_text: (optional) Message to include with the document
+        :return:
+        """
+        http_method = "PUT"
+        endpoint = "ppp_loan_forgiveness_message_reply/{0}/".format(str(slug))
+        uri = self.client.api_uri + endpoint
+        params = {'document_type': document_types, 'content': message_text, 'document_name': document_names}
+        #files = {'document': documents}
+
+        files = []
+        for document in documents:
+            doc = ('document', document)
+            files.append(doc)
+
+        try:
+            response = self.execute(http_method=http_method,
+                                    url=uri,
+                                    data=params,
+                                    files=files)
+            return {'status': response.status_code,
+                    'data': json.loads(response.text)}
+        except:
+            raise UnknownException
