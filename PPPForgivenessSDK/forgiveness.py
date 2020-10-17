@@ -83,29 +83,29 @@ class ForgivenessRequestApi(BaseApi):
             entity_name,
             ein,
             funding_date,
-            forgive_payroll,
-            forgive_rent,
-            forgive_utilities,
-            forgive_mortgage,
             address1,
             address2,
             phone_number,
             forgive_fte_at_loan_application,
-            forgive_line_6_3508_or_line_5_3508ez,
-            forgive_payroll_cost_60_percent_requirement,
             forgive_amount,
             forgive_fte_at_forgiveness_application,
             forgive_covered_period_from,
             forgive_covered_period_to,
             forgive_2_million,
-            forgive_payroll_schedule,
             primary_email,
             primary_name,
             ez_form,
-            no_reduction_in_employees,
-            no_reduction_in_employees_and_covid_impact,
             forgive_lender_confirmation,
             forgive_lender_decision,
+            forgive_payroll=None,
+            forgive_rent=None,
+            forgive_utilities=None,
+            forgive_mortgage=None,
+            forgive_line_6_3508_or_line_5_3508ez=None,
+            forgive_payroll_cost_60_percent_requirement=None,
+            forgive_payroll_schedule=None,
+            no_reduction_in_employees=None,
+            no_reduction_in_employees_and_covid_impact=None,
             demographics=[],
             forgive_eidl_amount=None,
             forgive_eidl_application_number=None,
@@ -128,6 +128,7 @@ class ForgivenessRequestApi(BaseApi):
             forgive_schedule_a_line_13=None,
             forgive_alternate_covered_period_from=None,
             forgive_alternate_covered_period_to=None,
+            s_form=False,
         ):
         """
         :param bank_notional_amount:
@@ -177,6 +178,7 @@ class ForgivenessRequestApi(BaseApi):
         :param primary_email:
         :param primary_name:
         :param ez_form:
+        :param s_form:
         :param no_reduction_in_employees:
         :param no_reduction_in_employees_and_covid_impact:
         :param forgive_lender_confirmation;
@@ -188,7 +190,19 @@ class ForgivenessRequestApi(BaseApi):
 
         uri = self.client.api_uri + endpoint
 
-        # mandatory fields
+        if not s_form:
+            # enforce fields not previously allowed as None for 3508/3508EZ
+            assert (forgive_payroll is not None), "forgive_payroll cannot be None when 3508 or 3508EZ is selected"
+            assert (forgive_utilities is not None), "forgive_utilities cannot be None when 3508 or 3508EZ is selected"
+            assert (forgive_mortgage is not None), "forgive_mortgage cannot be None when 3508 or 3508EZ is selected"
+            assert (forgive_rent is not None), "forgive_rent cannot be None when 3508 or 3508EZ is selected"
+            assert (forgive_line_6_3508_or_line_5_3508ez is not None), "forgive_line_6_3508_or_line_5_3508ez cannot be None when 3508 or 3508EZ is selected"
+            assert (forgive_payroll_cost_60_percent_requirement is not None), "forgive_payroll_cost_60_percent_requirement cannot be None when 3508 or 3508EZ is selected"
+            assert (forgive_payroll_schedule is not None), "forgive_payroll_schedule cannot be None when 3508 or 3508EZ is selected"
+            assert (no_reduction_in_employees is not None), "no_reduction_in_employees cannot be None when 3508 or 3508EZ is selected"
+            assert (no_reduction_in_employees_and_covid_impact is not None), "no_reduction_in_employees_and_covid_impact cannot be None when 3508 or 3508EZ is selected"
+
+        # mandatory fields for all forms, Full, EZ, S
         params = {
             'etran_loan': {
                 "bank_notional_amount": bank_notional_amount,
@@ -197,43 +211,50 @@ class ForgivenessRequestApi(BaseApi):
                 "entity_name": entity_name,
                 "ein": ein,
                 "funding_date": funding_date,
-                "forgive_payroll": forgive_payroll,
-                "forgive_rent": forgive_rent,
-                "forgive_utilities": forgive_utilities,
-                "forgive_mortgage": forgive_mortgage,
                 "address1": address1,
                 "address2": address2,
                 "phone_number": phone_number,
                 "forgive_fte_at_loan_application": forgive_fte_at_loan_application,
-                "forgive_line_6_3508_or_line_5_3508ez": forgive_line_6_3508_or_line_5_3508ez,
-                "forgive_payroll_cost_60_percent_requirement": forgive_payroll_cost_60_percent_requirement,
                 "forgive_amount": forgive_amount,
                 "forgive_fte_at_forgiveness_application": forgive_fte_at_forgiveness_application,
-                "forgive_covered_period_from": forgive_covered_period_from,
-                "forgive_covered_period_to": forgive_covered_period_to,
-                "forgive_2_million": forgive_2_million,
-                "forgive_payroll_schedule": forgive_payroll_schedule,
                 "primary_email": primary_email,
                 "primary_name": primary_name,
                 "ez_form": ez_form,
-                "no_reduction_in_employees": no_reduction_in_employees,
-                "no_reduction_in_employees_and_covid_impact": no_reduction_in_employees_and_covid_impact,
                 'forgive_lender_confirmation': forgive_lender_confirmation,
                 'forgive_lender_decision': forgive_lender_decision,
+                's_form': s_form,
             }
         }
 
-        # optional fields
+        if not s_form:
+            # mandatory fields for EZ, Full
+            params['etran_loan'].update({
+                "forgive_covered_period_from": forgive_covered_period_from,
+                "forgive_covered_period_to": forgive_covered_period_to,
+                "forgive_2_million": forgive_2_million,
+                "forgive_payroll": forgive_payroll,
+                "forgive_rent": forgive_rent,
+                "forgive_utilities": forgive_utilities,
+                "forgive_mortgage": forgive_mortgage,
+                "forgive_line_6_3508_or_line_5_3508ez": forgive_line_6_3508_or_line_5_3508ez,
+                "forgive_payroll_cost_60_percent_requirement": forgive_payroll_cost_60_percent_requirement,
+                "forgive_payroll_schedule": forgive_payroll_schedule,
+                "no_reduction_in_employees": no_reduction_in_employees,
+                "no_reduction_in_employees_and_covid_impact": no_reduction_in_employees_and_covid_impact,
+            })
+            # optional fields for EZ, Full
+            if forgive_alternate_covered_period_from: params['etran_loan']['forgive_alternate_covered_period_from'] = forgive_alternate_covered_period_from
+            if forgive_alternate_covered_period_to: params['etran_loan']['forgive_alternate_covered_period_to'] = forgive_alternate_covered_period_to
+
+        # optional fields for all 3, S, EZ, Full
         if forgive_eidl_amount: params['etran_loan']['forgive_eidl_amount'] = forgive_eidl_amount
         if forgive_eidl_application_number: params['etran_loan']['forgive_eidl_application_number'] = forgive_eidl_application_number
         if dba_name: params['etran_loan']['dba_name'] = dba_name
         if demographics: params['etran_loan']['demographics'] = demographics
-        if forgive_alternate_covered_period_from: params['etran_loan']['forgive_alternate_covered_period_from'] = forgive_alternate_covered_period_from
-        if forgive_alternate_covered_period_to: params['etran_loan']['forgive_alternate_covered_period_to'] = forgive_alternate_covered_period_to
 
 
-        if not ez_form:
-            # mandatory 3508 fields
+        if not ez_form and not s_form:
+            # mandatory fields for Full
             params['etran_loan'].update({
                 'forgive_modified_total': forgive_modified_total,
                 'forgive_schedule_a_line_1': forgive_schedule_a_line_1,
@@ -251,7 +272,7 @@ class ForgivenessRequestApi(BaseApi):
                 "forgive_schedule_a_line_13": forgive_schedule_a_line_13,
             })
 
-            # optional 3508 fields
+            # optional fields for Full
             if forgive_schedule_a_line_11: params['etran_loan']['forgive_schedule_a_line_11'] = forgive_schedule_a_line_11
             if forgive_schedule_a_line_12: params['etran_loan']['forgive_schedule_a_line_12'] = forgive_schedule_a_line_12
 

@@ -25,6 +25,7 @@ python setup.py install --user
 
 ## API examples
 * [create_forgiveness_request.py](examples/create_forgiveness_request.py)
+* [create_forgiveness_request_3508s.py](examples/create_forgiveness_request_3508s.py)
 * [delete_forgiveness_request.py](examples/delete_forgiveness_request.py)
 * [list_forgiveness_requests.py](examples/list_forgiveness_requests.py)
 * [read_forgiveness_requests_by_slug.py](examples/read_forgiveness_requests_by_slug.py)
