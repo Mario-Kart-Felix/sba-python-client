@@ -44,8 +44,6 @@ result = forgiveness_api.create(
                                 primary_email= "user@example.com",
                                 primary_name= "Jason",
                                 ez_form= True,
-                                no_reduction_in_employees= True,
-                                no_reduction_in_employees_and_covid_impact= True,
                                 forgive_lender_confirmation= True,
                                 forgive_lender_decision= 1
                     )
