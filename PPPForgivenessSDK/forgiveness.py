@@ -89,8 +89,6 @@ class ForgivenessRequestApi(BaseApi):
             forgive_fte_at_loan_application,
             forgive_amount,
             forgive_fte_at_forgiveness_application,
-            forgive_covered_period_from,
-            forgive_covered_period_to,
             forgive_2_million,
             primary_email,
             primary_name,
@@ -106,6 +104,8 @@ class ForgivenessRequestApi(BaseApi):
             forgive_payroll_schedule=None,
             no_reduction_in_employees=None,
             no_reduction_in_employees_and_covid_impact=None,
+            forgive_covered_period_from=None,
+            forgive_covered_period_to=None,
             demographics=[],
             forgive_eidl_amount=None,
             forgive_eidl_application_number=None,
@@ -199,6 +199,10 @@ class ForgivenessRequestApi(BaseApi):
             assert (forgive_line_6_3508_or_line_5_3508ez is not None), "forgive_line_6_3508_or_line_5_3508ez cannot be None when 3508 or 3508EZ is selected"
             assert (forgive_payroll_cost_60_percent_requirement is not None), "forgive_payroll_cost_60_percent_requirement cannot be None when 3508 or 3508EZ is selected"
             assert (forgive_payroll_schedule is not None), "forgive_payroll_schedule cannot be None when 3508 or 3508EZ is selected"
+            assert (forgive_covered_period_to is not None), "forgive_covered_period_to cannot be None when 3508 or 3508EZ is selected"
+            assert (forgive_covered_period_from is not None), "forgive_covered_period_from cannot be None when 3508 or 3508EZ is selected"
+
+        if not s_form and not ez_form:
             assert (no_reduction_in_employees is not None), "no_reduction_in_employees cannot be None when 3508 or 3508EZ is selected"
             assert (no_reduction_in_employees_and_covid_impact is not None), "no_reduction_in_employees_and_covid_impact cannot be None when 3508 or 3508EZ is selected"
 
@@ -239,8 +243,6 @@ class ForgivenessRequestApi(BaseApi):
                 "forgive_line_6_3508_or_line_5_3508ez": forgive_line_6_3508_or_line_5_3508ez,
                 "forgive_payroll_cost_60_percent_requirement": forgive_payroll_cost_60_percent_requirement,
                 "forgive_payroll_schedule": forgive_payroll_schedule,
-                "no_reduction_in_employees": no_reduction_in_employees,
-                "no_reduction_in_employees_and_covid_impact": no_reduction_in_employees_and_covid_impact,
             })
             # optional fields for EZ, Full
             if forgive_alternate_covered_period_from: params['etran_loan']['forgive_alternate_covered_period_from'] = forgive_alternate_covered_period_from
@@ -256,6 +258,8 @@ class ForgivenessRequestApi(BaseApi):
         if not ez_form and not s_form:
             # mandatory fields for Full
             params['etran_loan'].update({
+                "no_reduction_in_employees": no_reduction_in_employees,
+                "no_reduction_in_employees_and_covid_impact": no_reduction_in_employees_and_covid_impact,
                 'forgive_modified_total': forgive_modified_total,
                 'forgive_schedule_a_line_1': forgive_schedule_a_line_1,
                 "forgive_schedule_a_line_2": forgive_schedule_a_line_2,
