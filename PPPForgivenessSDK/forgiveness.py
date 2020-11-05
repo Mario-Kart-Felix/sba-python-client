@@ -89,12 +89,12 @@ class ForgivenessRequestApi(BaseApi):
             forgive_fte_at_loan_application,
             forgive_amount,
             forgive_fte_at_forgiveness_application,
-            forgive_2_million,
             primary_email,
             primary_name,
             ez_form,
             forgive_lender_confirmation,
             forgive_lender_decision,
+            forgive_2_million=None,
             forgive_payroll=None,
             forgive_rent=None,
             forgive_utilities=None,
@@ -248,7 +248,7 @@ class ForgivenessRequestApi(BaseApi):
             if forgive_alternate_covered_period_from: params['etran_loan']['forgive_alternate_covered_period_from'] = forgive_alternate_covered_period_from
             if forgive_alternate_covered_period_to: params['etran_loan']['forgive_alternate_covered_period_to'] = forgive_alternate_covered_period_to
 
-        # optional fields for all 3, S, EZ & Full
+        # optional fields for all 3, S, EZ, Full
         if forgive_eidl_amount: params['etran_loan']['forgive_eidl_amount'] = forgive_eidl_amount
         if forgive_eidl_application_number: params['etran_loan']['forgive_eidl_application_number'] = forgive_eidl_application_number
         if dba_name: params['etran_loan']['dba_name'] = dba_name
